@@ -1,4 +1,4 @@
 *.pyc
-tokentoken.py
+settings.py
 testing_file.py
 bot.log
