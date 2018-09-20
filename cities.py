@@ -17,12 +17,12 @@ PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
     'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
 
 
-
+town_list = ['Москва', 'Архангельск', 'Красноярск', 'Курск', 'Клин', 'Нальчик', 'Краснодар']
+game_list = town_list[:]
 
 
 def cities(bot,update):
-    town_list = ['Москва', 'Архангельск', 'Красноярск', 'Курск', 'Клин', 'Нальчик', 'Краснодар']
-    game_list = town_list[:]
+    global game_list
     user_text = update.message.text.split()
     user_town = user_text[1]
     print(user_town)
@@ -31,6 +31,7 @@ def cities(bot,update):
         end_letter = user_town[-1].upper()
         if len(game_list) == 0:
             text = 'Ты выиграл!'
+            game_list = town_list[:]
             print(text)
             update.message.reply_text(text)    
         for town in game_list:
@@ -42,6 +43,7 @@ def cities(bot,update):
                 break
             elif game_list.index(town) == len(game_list) - 1:
                 text = 'Ты выиграл!'
+                game_list = town_list[:]
                 print(text)
                 update.message.reply_text(text)     
 
