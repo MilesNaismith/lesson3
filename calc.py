@@ -25,34 +25,45 @@ def bot_calc(bot, update):
         answer = 'Что будем считать? Отсутствует выражение!'
         print(answer)
         update.message.reply_text(answer)
-    elif not user_text[1].endswith('='):
+    elif not user_text[1].endswith('=') or len(user_text) > 2:
         answer = 'неверный формат выражения!'
         print(answer)
         update.message.reply_text(answer)        
     else:
         text = user_text[1]
     if '+' in text:
-        x = float(text[:text.index('+')])
-        y = float(text[text.index('+') + 1:text.index('=')])
-        answer = x + y
+        try:
+            x = float(text[:text.index('+')])
+            y = float(text[text.index('+') + 1:text.index('=')])
+            answer = x + y
+        except TypeError:
+            answer = 'Работаем только с числами'    
     elif '-'in text:
-        x = float(text[:text.index('-')])
-        y = float(text[text.index('-') + 1:text.index('=')])
-        answer = x - y
+        try:
+            x = float(text[:text.index('-')])
+            y = float(text[text.index('-') + 1:text.index('=')])
+            answer = x - y
+        except TypeError:
+            answer = 'Работаем только с числами'        
     elif '*' in text:
-        x = float(text[:text.index('*')])
-        y = float(text[text.index('*') + 1:text.index('=')])
-        answer = x * y
+        try:
+            x = float(text[:text.index('*')])
+            y = float(text[text.index('*') + 1:text.index('=')])
+            answer = x * y
+        except TypeError:
+            answer = 'Работаем только с числами'        
     elif ':' in text:
-        x = float(text[:text.index(':')])
-        y = float(text[text.index(':') + 1:text.index('=')])
-        if y == 0:
+        try:
+            x = float(text[:text.index(':')])
+            y = float(text[text.index(':') + 1:text.index('=')])
+        except TypeError:
+            answer = 'Работаем только с числами'        
+            if y == 0:
             answer = 'на ноль делить нельзя'
         else:
             answer = x / y       
     print(answer)
     update.message.reply_text(answer) 
-
 
 def main():
     mybot = Updater(API_TOKEN, request_kwargs=PROXY)
