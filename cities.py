@@ -16,12 +16,13 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
 PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
     'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
 
-town_list = ['Москва', 'Архангельск', 'Красноярск', 'Курск', 'Клин', 'Нальчик', 'Краснодар']
 
-game_list = town_list[:]
+
+
 
 def cities(bot,update):
-    global game_list
+    town_list = ['Москва', 'Архангельск', 'Красноярск', 'Курск', 'Клин', 'Нальчик', 'Краснодар']
+    game_list = town_list[:]
     user_text = update.message.text.split()
     user_town = user_text[1]
     print(user_town)
@@ -55,5 +56,5 @@ def main():
     mybot.start_polling()
     mybot.idle()
  
-
-main()
+if __name__ == "__main__":
+    main()

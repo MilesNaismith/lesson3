@@ -29,11 +29,11 @@ def word_count(bot, update):
     elif user_text[1].startswith('"') and user_text[-1].endswith('"'):
         text = str(len(user_text) - 1)
         if text.endswith('1'):
-            text = text + ' слово'
+            text = '{} {}'.format(text, 'слово')
         elif text.endswith('2') or text.endswith('3') or text.endswith('4'):
-            text = text + ' слова'
+            text = '{} {}'.format(text, 'слова')
         else:
-            text = text + ' слов'        
+            text = '{} {}'.format(text, 'слов')        
     else:
         text = 'Где кавычки?'        
     print(text)
@@ -48,4 +48,5 @@ def main():
     mybot.start_polling()
     mybot.idle()
 
-main()
+if __name__ == "__main__":
+    main()

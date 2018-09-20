@@ -21,17 +21,15 @@ PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
 
 def full_moon(bot,update):
     user_text = update.message.text.split()
-    user_date = user_text[-1].split('.')
+    user_date = user_text[-1]
     try:
-        for value in range(len(user_date)):
-            user_date[value] = int(user_date[value])
+        date_dt = datetime.strptime(user_date, '%d.%m.%Y')
     except (TypeError, ValueError):
-        text = 'неверные данные'
+        text ='Введите дату в формате дд.мм.гггг'
         print(text)    
         update.message.reply_text(text)        
-    user_date = tuple(user_date[::-1])        
-    text = ephem.next_full_moon(user_date)
-    print(ephem.next_full_moon(user_date))
+    text = ephem.next_full_moon(date_dt)    
+    print(text)
     update.message.reply_text(text)
 
 
@@ -43,5 +41,5 @@ def main():
     mybot.start_polling()
     mybot.idle()
  
-
-main()
+if __name__ == "__main__":
+    main()
